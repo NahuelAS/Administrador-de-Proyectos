@@ -54,7 +54,7 @@ export class ProjectController {
             project.description = req.body.description;
 
             await project.save();
-            res.send('Proyecto Actializado');
+            res.send('Proyecto Actualizado');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }
