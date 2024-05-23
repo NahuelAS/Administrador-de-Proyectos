@@ -29,6 +29,8 @@ export const taskSchema = z.object({
     name: z.string(),
     description: z.string(),
     project: z.string(),
+    createdAt: z.string(),
+    updatedAt: z.string(),
     status: taskStatusSchema,
 });
 
