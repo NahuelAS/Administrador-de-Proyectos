@@ -6,10 +6,12 @@ import Token from '../Models/Token';
 import { AuthEmail } from '../emails/AuthEmail';
 
 export class AuthController {
+
     static createAccount = async (req: Request, res: Response) => {
         try {
             const { password, email } = req.body;
             
+            //Verificar si el usuario ya existe
             const userExists = await User.findOne({ email });
             if(userExists) {
                 const error = new Error('El Usuario ya ha sido Registrado');
@@ -97,6 +99,42 @@ export class AuthController {
             }
 
             res.send('Autenticado...');
+        } catch (error) {
+            res.status(500).json({error: '¡A ocurrido un Problema!'});
+        }
+    }
+
+    static requestConfirmationCode = async (req: Request, res: Response) => {
+        try {
+            const { email } = req.body;
+            
+            //Verifica si el usuario existe
+            const user = await User.findOne({ email });
+            if(!user) {
+                const error = new Error('El Usuario NO esta Registrado');
+                return res.status(404).json({ error: error.message });
+            }
+
+            if(user.confirmed) {
+                const error = new Error('El Usuario ya esta Confirmado');
+                return res.status(403).json({ error: error.message });
+            }
+
+            //Token
+            const token = new Token();
+            token.token = generateToken();
+            token.user = user.id;
+
+            //Envio Email
+            AuthEmail.sendConfirmationEmail({
+                email: user.email,
+                name: user.name,
+                token: token.token,
+            });
+
+            await Promise.allSettled( [user.save(), token.save()] );
+
+            res.send('Nuevo Token Enviado a su E-mail');
         } catch (error) {
             res.status(500).json({error: '¡A ocurrido un Problema!'});
         }

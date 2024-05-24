@@ -38,4 +38,11 @@ router.post('/login',
     AuthController.login
 );
 
+router.post('/request-code', 
+    body('email')
+        .isEmail().withMessage('El E-mail No es valido'),
+    handleInputErrors,
+    AuthController.requestConfirmationCode
+);
+
 export default router;
