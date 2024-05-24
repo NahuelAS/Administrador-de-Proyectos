@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { AuthController } from "../Controllers/authController";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
 import { handleInputErrors } from "../Middlewares/validation";
 
 const router = Router();
@@ -44,5 +44,33 @@ router.post('/request-code',
     handleInputErrors,
     AuthController.requestConfirmationCode
 );
+
+router.post('/forgot-password',  
+    body('email')
+        .isEmail().withMessage('El E-mail No es valido'),
+    handleInputErrors,
+    AuthController.forgotPasssword
+);
+
+router.post('/validate-token', 
+    body('token')
+        .notEmpty().withMessage('el Token no Puede estar Vacio'),
+    handleInputErrors,
+    AuthController.validateToken
+); 
+
+router.post('/update-password/:token',  
+    param('token').isNumeric().withMessage('Token no Válido'),    
+    body('password')
+        .isLength({min: 8}).withMessage('La contraseña es demaciado corta, Minimo 8 caracteres'),
+    body('password_confirmation').custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error('Las contraseñas no coinciden');
+        }
+        return true;
+        }),
+    handleInputErrors,
+    AuthController.updatePasswordWithToken
+); 
 
 export default router;

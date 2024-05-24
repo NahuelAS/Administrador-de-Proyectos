@@ -139,4 +139,73 @@ export class AuthController {
             res.status(500).json({error: '¡A ocurrido un Problema!'});
         }
     }
+
+    static forgotPasssword = async (req: Request, res: Response) => {
+        try {
+            const { email } = req.body;
+            
+            //Verifica si el usuario existe
+            const user = await User.findOne({ email });
+            if(!user) {
+                const error = new Error('El Usuario NO esta Registrado');
+                return res.status(404).json({ error: error.message });
+            }
+
+            //Token
+            const token = new Token();
+            token.token = generateToken();
+            token.user = user.id;
+            await token.save();
+
+            //Envio Email
+            AuthEmail.sendPasswordResetToken({
+                email: user.email,
+                name: user.name,
+                token: token.token,
+            });
+
+            res.send('Revisa tu e-mail para reestablecer tu contraseña');
+        } catch (error) {
+            res.status(500).json({error: '¡A ocurrido un Problema!'});
+        }
+    }
+
+    static validateToken = async (req: Request, res: Response) => {
+        try {
+            const { token } = req.body; 
+
+            const tokenExists = await Token.findOne({ token });
+            if(!tokenExists) {
+                const error = new Error('Token No Valido');
+                return res.status(404).json({ error: error.message });
+            }
+
+            res.send('Token Válido, Reestablece tu contraseña');
+
+        } catch (error) {
+            res.status(500).json({error: '¡A ocurrido un Problema!'});
+        }
+    }
+
+    static updatePasswordWithToken = async (req: Request, res: Response) => {
+        try {
+            const { token } = req.params; 
+
+            const tokenExists = await Token.findOne({ token });
+            if(!tokenExists) {
+                const error = new Error('Token No Valido');
+                return res.status(404).json({ error: error.message });
+            }
+
+            const user = await User.findById(tokenExists.user);
+            user.password = await hashPassword(req.body.password);
+
+            await Promise.allSettled( [user.save(), tokenExists.deleteOne()] );
+
+            res.send('Contraseña Modificada Correctamente');
+
+        } catch (error) {
+            res.status(500).json({error: '¡A ocurrido un Problema!'});
+        }
+    }
 }
