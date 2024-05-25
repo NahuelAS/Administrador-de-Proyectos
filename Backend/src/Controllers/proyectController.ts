@@ -1,11 +1,15 @@
 import type { Request, Response } from "express"
-import Project from "../Models/Proyect";
+import Project from "../Models/Project";
 
 export class ProjectController {
 
     static createProjects = async (req: Request, res: Response) => {
 
         const project = new Project(req.body);
+        
+        //Asigna un Manager
+        project.manager = req.user.id;
+
         try {
             await project.save();
             res.send('Project Created Success');
@@ -16,7 +20,12 @@ export class ProjectController {
 
     static getAllProjects = async (req: Request, res: Response) => {
         try {
-            const projects = await Project.find({});
+            // Traer Proyectos segun el Manager
+            const projects = await Project.find({
+                $or: [
+                    {manager: {$in: req.user.id}}
+                ]
+            });
             res.json(projects);
         } catch (error) {
             res.status(500).json({error: 'Error'});
@@ -33,6 +42,11 @@ export class ProjectController {
                 return res.status(404).json({ error: error.message });
             }
 
+            if (project.manager.toString() !== req.user.id.toString()) {
+                const error = new Error('Acción No Válida');
+                return res.status(404).json({ error: error.message });
+            }
+
             res.json(project);
         } catch (error) {
             res.status(500).json({error: 'Error'});
@@ -46,6 +60,11 @@ export class ProjectController {
 
             if (!project) {
                 const error = new Error('Proyecto No Encontrado');
+                return res.status(404).json({ error: error.message });
+            }
+
+            if (project.manager.toString() !== req.user.id.toString()) {
+                const error = new Error('Solamente el Manager Puede Actualizar el Proyecto');
                 return res.status(404).json({ error: error.message });
             }
 
@@ -67,6 +86,11 @@ export class ProjectController {
 
             if (!project) {
                 const error = new Error('Proyecto No Encontrado');
+                return res.status(404).json({ error: error.message });
+            }
+
+            if (project.manager.toString() !== req.user.id.toString()) {
+                const error = new Error('Solamente el Manager Puede Eliminar el Proyecto');
                 return res.status(404).json({ error: error.message });
             }
 

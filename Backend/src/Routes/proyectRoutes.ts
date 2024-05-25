@@ -9,9 +9,10 @@ import { authenticate } from "../Middlewares/auth";
 
 const router = Router();
 
+router.use(authenticate);
+
 // Rutas de Proyectos
 router.post('/',
-    authenticate,
     body('projectName')
         .notEmpty().withMessage('El Nombre del Proyecto es Oblidatorio'),
     body('clientName')

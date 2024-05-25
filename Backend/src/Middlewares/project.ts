@@ -1,5 +1,5 @@
 import type { Request, Response, NextFunction } from "express";
-import Project, { IProyect } from "../Models/Proyect";
+import Project, { IProyect } from "../Models/Project";
 
 declare global {
     namespace Express {
