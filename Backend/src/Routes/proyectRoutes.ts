@@ -6,6 +6,7 @@ import { TaskController } from "../Controllers/taskController";
 import { projectExists } from "../Middlewares/project";
 import { taskBelongsToProject, taskExists } from "../Middlewares/task";
 import { authenticate } from "../Middlewares/auth";
+import { TeamMemberController } from "../Controllers/teamController";
 
 const router = Router();
 
@@ -95,6 +96,30 @@ router.post('/:projectId/tasks/:taskId/status',
         .notEmpty().withMessage('Establecer un estado es Obligatorio'),
     handleInputErrors,
     TaskController.updateStatus
+);
+
+//Rutas Para Equipos
+router.post('/:projectId/team/find',
+    body('email')
+        .isEmail().withMessage('El E-mail No es valido'),
+    handleInputErrors,
+    TeamMemberController.findMemberByEmail
+);
+
+router.get('/:projectId/team', TeamMemberController.getProjectTeam);
+
+router.post('/:projectId/team',
+    body('id')
+        .isMongoId().withMessage('Id No Válido'),
+    handleInputErrors,
+    TeamMemberController.addMemberById
+);
+
+router.delete('/:projectId/team',
+    body('id')
+        .isMongoId().withMessage('Id No Válido'),
+    handleInputErrors,
+    TeamMemberController.removeMemberById
 );
 
 export default router;

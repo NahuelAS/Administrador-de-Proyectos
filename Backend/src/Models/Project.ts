@@ -9,6 +9,7 @@ export interface IProyect extends Document {
     description: string;
     tasks: PopulatedDoc<ITask & Document>[];
     manager: PopulatedDoc<IUser & Document>;
+    team: PopulatedDoc<IUser & Document>[];
 }
 
 //Moongoose
@@ -37,8 +38,13 @@ const ProjectSchema: Schema = new Schema({
     manager: {
         type: Types.ObjectId,
         ref: 'User'
-    }
-    
+    },
+    team: [
+        {
+            type: Types.ObjectId,
+            ref: 'User'
+        }
+    ]
 }, {timestamps: true});
 
 const Project = mongoose.model<IProyect>('Project', ProjectSchema);
