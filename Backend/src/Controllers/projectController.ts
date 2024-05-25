@@ -26,6 +26,7 @@ export class ProjectController {
                     {manager: {$in: req.user.id}}
                 ]
             });
+
             res.json(projects);
         } catch (error) {
             res.status(500).json({error: 'Error'});

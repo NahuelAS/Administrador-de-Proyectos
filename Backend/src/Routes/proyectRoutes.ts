@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { body, param } from "express-validator";
-import { ProjectController } from "../Controllers/proyectController";
+import { ProjectController } from "../Controllers/projectController";
 import { handleInputErrors } from "../Middlewares/validation";
 import { TaskController } from "../Controllers/taskController";
 import { projectExists } from "../Middlewares/project";
