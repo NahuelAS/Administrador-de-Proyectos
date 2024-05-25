@@ -12,7 +12,7 @@ export default function AppLayout() {
     if (isLoading) return 'Cargando...';
     if (isError) return <Navigate to={'/auth/login'} />
 
-    return (
+    if(data) return (
         <>
             <header
                 className="bg-gray-800 py-5"
@@ -24,7 +24,9 @@ export default function AppLayout() {
                         </Link>
                         
                     </div>
-                    <NavMenu />
+                    <NavMenu 
+                        name={data.name}
+                    />
                 </div>
 
             </header>
