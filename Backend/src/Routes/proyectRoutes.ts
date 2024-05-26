@@ -4,7 +4,7 @@ import { ProjectController } from "../Controllers/projectController";
 import { handleInputErrors } from "../Middlewares/validation";
 import { TaskController } from "../Controllers/taskController";
 import { projectExists } from "../Middlewares/project";
-import { taskBelongsToProject, taskExists } from "../Middlewares/task";
+import { hasAuthorization, taskBelongsToProject, taskExists } from "../Middlewares/task";
 import { authenticate } from "../Middlewares/auth";
 import { TeamMemberController } from "../Controllers/teamController";
 
@@ -53,7 +53,8 @@ router.delete('/:id',
 //Rutas de Tareas
 router.param('projectId', projectExists);
 
-router.post('/:projectId/tasks', 
+router.post('/:projectId/tasks',
+    hasAuthorization,
     body('name')
         .notEmpty().withMessage('El Nombre de la Tarea es Oblidatorio'),
     body('description')
@@ -75,7 +76,8 @@ router.get('/:projectId/tasks/:taskId',
     TaskController.getTaskById
 );
 
-router.put('/:projectId/tasks/:taskId', 
+router.put('/:projectId/tasks/:taskId',
+    hasAuthorization,
     param('taskId').isMongoId().withMessage('ID No Valido'),
     body('name')
         .notEmpty().withMessage('El Nombre de la Tarea es Oblidatorio'),
@@ -84,7 +86,8 @@ router.put('/:projectId/tasks/:taskId',
     TaskController.updateTask
 );
 
-router.delete('/:projectId/tasks/:taskId', 
+router.delete('/:projectId/tasks/:taskId',
+    hasAuthorization, 
     param('taskId').isMongoId().withMessage('ID No Valido'),
     handleInputErrors,
     TaskController.deleteTask

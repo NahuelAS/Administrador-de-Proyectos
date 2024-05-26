@@ -34,5 +34,13 @@ export function taskBelongsToProject(req: Request, res: Response, next: NextFunc
         return res.status(400).json({ error: error.message });
     }
     next();
+}
 
+export function hasAuthorization(req: Request, res: Response, next: NextFunction) {
+    
+    if (req.user.id.toString() !== req.project.manager.toString()) {
+        const error = new Error('Accion No Permitida');
+        return res.status(400).json({ error: error.message });
+    }
+    next();
 }
