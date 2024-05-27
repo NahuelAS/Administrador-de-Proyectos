@@ -93,7 +93,7 @@ router.put('/profile',
 router.post('/update-password',
     authenticate,
     body('current_password')
-        .notEmpty().withMessage('El password actual no puede estas vacio'),
+        .notEmpty().withMessage('El password actual no puede estar vacio'),
     body('password')
         .isLength({min: 8}).withMessage('La contraseña es demaciado corta, Minimo 8 caracteres'),
     body('password_confirmation').custom((value, { req }) => {
@@ -104,6 +104,14 @@ router.post('/update-password',
     }),
     handleInputErrors,
     AuthController.updateCurrentUserPassword
+);
+
+router.post('/check-password',
+    authenticate,
+    body('password')
+        .notEmpty().withMessage('El password no puede estar vacio'),
+    handleInputErrors,
+    AuthController.checkPassword
 );
 
 export default router;
