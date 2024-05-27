@@ -77,5 +77,33 @@ router.post('/update-password/:token',
 router.get('/user', 
     authenticate,
     AuthController.user
-)
+);
+
+/** Perfil */
+router.put('/profile', 
+    authenticate,
+    body('name')
+        .notEmpty().withMessage('Se debe ingresar un Nombre'),
+    body('email')
+        .isEmail().withMessage('El E-mail No es valido'),
+    handleInputErrors,
+    AuthController.updateProfile
+);
+
+router.post('/update-password',
+    authenticate,
+    body('current_password')
+        .notEmpty().withMessage('El password actual no puede estas vacio'),
+    body('password')
+        .isLength({min: 8}).withMessage('La contraseña es demaciado corta, Minimo 8 caracteres'),
+    body('password_confirmation').custom((value, { req }) => {
+        if (value !== req.body.password) {
+            throw new Error('Las contraseñas no coinciden');
+        }
+        return true;
+    }),
+    handleInputErrors,
+    AuthController.updateCurrentUserPassword
+);
+
 export default router;
