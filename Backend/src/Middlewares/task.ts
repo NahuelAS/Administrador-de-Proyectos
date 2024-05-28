@@ -16,7 +16,7 @@ export async function taskExists(req: Request, res: Response, next: NextFunction
         const task = await Task.findById(taskId);
 
         if (!task) {
-            const error = new Error('Tarea no encontrado');
+            const error = new Error('Tarea no encontrada');
             return res.status(404).json({ error: error.message });
         }
         req.task = task;
@@ -39,7 +39,7 @@ export function taskBelongsToProject(req: Request, res: Response, next: NextFunc
 export function hasAuthorization(req: Request, res: Response, next: NextFunction) {
     
     if (req.user.id.toString() !== req.project.manager.toString()) {
-        const error = new Error('Accion No Permitida');
+        const error = new Error('No tienes Permiso');
         return res.status(400).json({ error: error.message });
     }
     next();

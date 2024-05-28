@@ -45,7 +45,7 @@ export class TeamMemberController {
         req.project.team.push(user.id);
         await req.project.save();
 
-        res.send('Usuario Agregado al Proyecto Correctamente');
+        res.send('Usuario Agregado al Proyecto');
     }
     
     static removeMemberById = async (req: Request, res: Response) => {

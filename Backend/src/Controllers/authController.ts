@@ -15,7 +15,7 @@ export class AuthController {
             //Verificar si el usuario ya existe
             const userExists = await User.findOne({ email });
             if(userExists) {
-                const error = new Error('El Usuario ya ha sido Registrado');
+                const error = new Error('Usuario Existente');
                 return res.status(409).json({ error: error.message });
             }
 
@@ -38,7 +38,7 @@ export class AuthController {
 
             await Promise.allSettled( [user.save(), token.save()] );
 
-            res.send('Usuario Creado Correctamente, Revise su Email para confirmar su cuenta!!');
+            res.send('Usuario Creado Correctamente, Revise su Email para confirmar su cuenta');
         } catch (error) {
             res.status(500).json({error: '¡A ocurrido un Problema!'});
         }
@@ -205,7 +205,7 @@ export class AuthController {
 
             await Promise.allSettled( [user.save(), tokenExists.deleteOne()] );
 
-            res.send('Contraseña Modificada Correctamente');
+            res.send('Contraseña Modificada');
 
         } catch (error) {
             res.status(500).json({error: '¡A ocurrido un Problema!'});
@@ -230,7 +230,7 @@ export class AuthController {
 
         try {
             await req.user.save();
-            res.send('Perfil Actualizado Correctamente');
+            res.send('Perfil Actualizado');
         } catch (error) {
             res.status(500).json({error: '¡A ocurrido un Problema!'});
         }

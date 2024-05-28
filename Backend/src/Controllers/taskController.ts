@@ -9,7 +9,7 @@ export class TaskController {
             task.project = req.project.id;
             req.project.tasks.push(task.id);
             await Promise.allSettled([task.save(), req.project.save()])
-            res.send('Tarea Registrada Correctamente');
+            res.send('Tarea Registrada');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }
@@ -43,7 +43,7 @@ export class TaskController {
 
             await req.task.save();
 
-            res.send('Tarea Modificada Correctamente');
+            res.send('Tarea Modificada');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }
@@ -55,7 +55,7 @@ export class TaskController {
             req.project.tasks = req.project.tasks.filter( task => task.toString() !== req.task.id.toString() );
             await Promise.allSettled([ req.task.deleteOne(), req.project.save() ]);
 
-            res.send('Tarea Eliminada con Exito');
+            res.send('Tarea Eliminada');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }
@@ -75,7 +75,7 @@ export class TaskController {
 
             await req.task.save();
 
-            res.send('Status de Tarea actualizado Correctamente');
+            res.send('Estado de Tarea Actualizado');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }

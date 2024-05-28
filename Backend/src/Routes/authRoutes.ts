@@ -8,7 +8,7 @@ const router = Router();
 
 router.post('/create-account', 
     body('name')
-        .notEmpty().withMessage('Se debe ingresar un Nombre'),
+        .notEmpty().withMessage('Ingresar un Nombre'),
     body('password')
         .isLength({min: 8}).withMessage('La contraseña es demaciado corta, Minimo 8 caracteres'),
     body('password_confirmation').custom((value, { req }) => {
@@ -18,44 +18,44 @@ router.post('/create-account',
         return true;
     }),
     body('email')
-        .isEmail().withMessage('El E-mail No es valido'),
+        .isEmail().withMessage('El Email ingresado no es Válido'),
     handleInputErrors,
     AuthController.createAccount
 );
 
 router.post('/confirm-account', 
     body('token')
-        .notEmpty().withMessage('el Token no Puede estar Vacio'),
+        .notEmpty().withMessage('Debe ingresar un Token'),
     handleInputErrors,
     AuthController.confirmAccount
 ); 
 
 router.post('/login', 
     body('email')
-        .isEmail().withMessage('El E-mail No es valido'),
+        .isEmail().withMessage('El Email ingresado no es Válido'),
     body('password')
-        .notEmpty().withMessage('La contraseña no puede ir vacia'),
+        .notEmpty().withMessage('Ingresar una Contraseña'),
     handleInputErrors,
     AuthController.login
 );
 
 router.post('/request-code', 
     body('email')
-        .isEmail().withMessage('El E-mail No es valido'),
+        .isEmail().withMessage('El Email ingresado no es Válido'),
     handleInputErrors,
     AuthController.requestConfirmationCode
 );
 
 router.post('/forgot-password',  
     body('email')
-        .isEmail().withMessage('El E-mail No es valido'),
+        .isEmail().withMessage('El Email ingresado no es Válido'),
     handleInputErrors,
     AuthController.forgotPasssword
 );
 
 router.post('/validate-token', 
     body('token')
-        .notEmpty().withMessage('el Token no Puede estar Vacio'),
+        .notEmpty().withMessage('Debe ingresar un Token'),
     handleInputErrors,
     AuthController.validateToken
 ); 
@@ -83,9 +83,9 @@ router.get('/user',
 router.put('/profile', 
     authenticate,
     body('name')
-        .notEmpty().withMessage('Se debe ingresar un Nombre'),
+        .notEmpty().withMessage('Ingresar un Nombre'),
     body('email')
-        .isEmail().withMessage('El E-mail No es valido'),
+        .isEmail().withMessage('El Email ingresado no es Válido'),
     handleInputErrors,
     AuthController.updateProfile
 );
@@ -93,7 +93,7 @@ router.put('/profile',
 router.post('/update-password',
     authenticate,
     body('current_password')
-        .notEmpty().withMessage('El password actual no puede estar vacio'),
+        .notEmpty().withMessage('Ingresar tu Contraseña Actual'),
     body('password')
         .isLength({min: 8}).withMessage('La contraseña es demaciado corta, Minimo 8 caracteres'),
     body('password_confirmation').custom((value, { req }) => {
@@ -109,7 +109,7 @@ router.post('/update-password',
 router.post('/check-password',
     authenticate,
     body('password')
-        .notEmpty().withMessage('El password no puede estar vacio'),
+        .notEmpty().withMessage('Ingresar una Contraseña'),
     handleInputErrors,
     AuthController.checkPassword
 );

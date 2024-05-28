@@ -12,7 +12,7 @@ export class ProjectController {
 
         try {
             await project.save();
-            res.send('Project Created Success');
+            res.send('Proyecto Creado');
         } catch (error) {
             res.status(500).json({error: 'Error'});
         }
