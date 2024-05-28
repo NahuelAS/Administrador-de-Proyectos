@@ -33,7 +33,7 @@ export default function LoginView() {
             <h1 className="text-5xl font-black text-white">Iniciar Sesión</h1> 
             <p className="text-2xl font-light text-white mt-5">
                 Ingresa para Planificar tus Proyectos {''}
-                <span className=" text-fuchsia-500 font-bold">Inicia Aquí</span>
+                <span className=" text-blue-500 font-bold">Inicia Aquí</span>
             </p>
         <form
             onSubmit={handleSubmit(handleLogin)}
@@ -66,14 +66,14 @@ export default function LoginView() {
             <div className="flex flex-col gap-5">
                 <label
                     className="font-normal text-2xl"
-                >Password</label>
+                >Contraseña</label>
 
                 <input
                     type="password"
-                    placeholder="Password de Registro"
+                    placeholder="Contraseña de Registro"
                     className="w-full p-3  border-gray-300 border"
                     {...register("password", {
-                        required: "El Password es obligatorio",
+                        required: "La Contraseña es obligatorio",
                     })}
                 />
                 {errors.password && (
@@ -84,7 +84,7 @@ export default function LoginView() {
                 <input
                     type="submit"
                     value='Iniciar Sesión'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                    className="bg-indigo-700 hover:bg-indigo-800 w-full p-3  text-white font-black  text-xl cursor-pointer"
                 />
         </form>
 

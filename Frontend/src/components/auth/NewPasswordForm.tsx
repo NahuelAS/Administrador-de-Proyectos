@@ -52,17 +52,17 @@ export default function NewPasswordForm({ token }: NewPasswordFormProps) {
                 <div className="flex flex-col gap-5">
                     <label
                         className="font-normal text-2xl"
-                    >Password</label>
+                    >Contraseña</label>
 
                     <input
                         type="password"
-                        placeholder="Password de Registro"
+                        placeholder="Contraseña de Registro"
                         className="w-full p-3  border-gray-300 border"
                         {...register("password", {
-                            required: "El Password es obligatorio",
+                            required: "La contraseña es obligatoria",
                             minLength: {
                                 value: 8,
-                                message: 'El Password debe ser mínimo de 8 caracteres'
+                                message: 'La Contraseña debe ser mínimo de 8 caracteres'
                             }
                         })}
                     />
@@ -74,16 +74,16 @@ export default function NewPasswordForm({ token }: NewPasswordFormProps) {
                 <div className="flex flex-col gap-5">
                     <label
                         className="font-normal text-2xl"
-                    >Repetir Password</label>
+                    >Repetir Contraseña</label>
 
                     <input
                         id="password_confirmation"
                         type="password"
-                        placeholder="Repite Password de Registro"
+                        placeholder="Repite la Contraseña de Registro"
                         className="w-full p-3  border-gray-300 border"
                         {...register("password_confirmation", {
-                            required: "Repetir Password es obligatorio",
-                            validate: value => value === password || 'Los Passwords no son iguales'
+                            required: "Repetir Contraseña es obligatoria",
+                            validate: value => value === password || 'Las Contraseñas no son iguales'
                         })}
                     />
 
@@ -94,8 +94,8 @@ export default function NewPasswordForm({ token }: NewPasswordFormProps) {
 
                 <input
                     type="submit"
-                    value='Establecer Password'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3  text-white font-black  text-xl cursor-pointer"
+                    value='Establecer Contraseña'
+                    className="bg-indigo-700 hover:bg-indigo-800 w-full p-3  text-white font-black  text-xl cursor-pointer"
                 />
             </form>
         </>

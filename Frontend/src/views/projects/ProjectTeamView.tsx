@@ -41,13 +41,13 @@ export default function ProjectTeamView() {
 
                 <button 
                     type="button"
-                    className="bg-purple-500 hover:bg-purple-600 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
+                    className="bg-cyan-500 hover:bg-cyan-600 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
                     onClick={() => navigate(location.pathname + '?addMember=true')}
                 >Agregar Colaborador</button>
                 
                 <Link
                     to={`/projects/${projectId}`}
-                    className="bg-fuchsia-500 hover:bg-fuchsia-600 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
+                    className="bg-indigo-500 hover:bg-indigo-600 px-10 py-3 text-white text-xl font-bold cursor-pointer transition-colors"
                 >Volver al Proyecto</Link>
             </nav>
 

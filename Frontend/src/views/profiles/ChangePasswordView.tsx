@@ -10,7 +10,7 @@ export default function ChangePasswordView() {
         current_password: '',
         password: '',
         password_confirmation: ''
-    }
+    } 
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm({ defaultValues: initialValues })
 
@@ -28,8 +28,8 @@ export default function ChangePasswordView() {
     <>
         <div className="mx-auto max-w-3xl">
 
-            <h1 className="text-5xl font-black ">Cambiar Password</h1>
-            <p className="text-2xl font-light text-gray-500 mt-5">Utiliza este formulario para cambiar tu password</p>
+            <h1 className="text-5xl font-black ">Cambiar Contraseña</h1>
+            <p className="text-2xl font-light text-gray-500 mt-5">Utiliza este formulario para cambiar tu Contraseña</p>
 
         <form
             onSubmit={handleSubmit(handleChangePassword)}
@@ -40,14 +40,14 @@ export default function ChangePasswordView() {
                 <label
                     className="text-sm uppercase font-bold"
                     htmlFor="current_password"
-                >Password Actual</label>
+                >Contraseña Actual</label>
                 <input
                     id="current_password"
                     type="password"
-                    placeholder="Password Actual"
+                    placeholder="Contraseña Actual"
                     className="w-full p-3  border border-gray-200"
                     {...register("current_password", {
-                        required: "El password actual es obligatorio",
+                        required: "La Contraseña actual es obligatoria",
                     })}
                 />
                     {errors.current_password && (
@@ -59,17 +59,17 @@ export default function ChangePasswordView() {
                 <label
                     className="text-sm uppercase font-bold"
                     htmlFor="password"
-                >Nuevo Password</label>
+                >Nueva Contraseña</label>
                 <input
                     id="password"
                     type="password"
-                    placeholder="Nuevo Password"
+                    placeholder="Nueva Contraseña"
                     className="w-full p-3  border border-gray-200"
                     {...register("password", {
-                            required: "El Nuevo Password es obligatorio",
+                            required: "La Nueva Contraseña es obligatoria",
                             minLength: {
                             value: 8,
-                            message: 'El Password debe ser mínimo de 8 caracteres'
+                            message: 'La Contraseña debe ser mínimo de 8 caracteres'
                         }
                     })}
                 />
@@ -81,12 +81,12 @@ export default function ChangePasswordView() {
                 <label
                     htmlFor="password_confirmation"
                     className="text-sm uppercase font-bold"
-                >Repetir Password</label>
+                >Repetir Contraseña</label>
 
                 <input
                     id="password_confirmation"
                     type="password"
-                    placeholder="Repetir Password"
+                    placeholder="Repetir Contraseña"
                     className="w-full p-3  border border-gray-200"
                     {...register("password_confirmation", {
                         required: "Este campo es obligatorio",
@@ -100,8 +100,8 @@ export default function ChangePasswordView() {
 
             <input
                 type="submit"
-                value='Cambiar Password'
-                className="bg-fuchsia-600 w-full p-3 text-white uppercase font-bold hover:bg-fuchsia-700 cursor-pointer transition-colors"
+                value='Cambiar Contraseña'
+                className="bg-indigo-700 w-full p-3 text-white uppercase font-bold hover:bg-indigo-800 cursor-pointer transition-colors"
             />
         </form>
         </div>

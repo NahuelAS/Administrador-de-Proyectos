@@ -50,7 +50,7 @@ export default function NoteDetails({note}: NoteDetailsProps) {
                 {canDelete && (
                     <button
                         type="button"
-                        className="bg-red-400 hover:bg-red-500 p-2 text-xs text-white font-bold cursor-pointer transition-colors"
+                        className="bg-red-400 hover:bg-red-500 p-2 text-xs text-white font-bold cursor-pointer transition-colors rounded-lg"
                         onClick={() => mutate({projectId, taskId, noteId: note._id})}
                     >Eliminar</button>
                 )}

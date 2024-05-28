@@ -16,7 +16,7 @@ export default function ProjectForm({errors, register}: ProjectFormProps) {
                 </label>
                 <input
                     id="projectName"
-                    className="w-full p-3  border border-gray-200"
+                    className="w-full p-3 border border-gray-200"
                     type="text"
                     placeholder="Nombre del Proyecto"
                     {...register("projectName", {

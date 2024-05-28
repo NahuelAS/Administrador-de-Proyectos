@@ -87,11 +87,11 @@ export default function TaskModalDetails() {
                                     
                                     <Dialog.Title
                                         as="h3"
-                                        className="font-black text-4xl text-slate-600 my-5"
+                                        className="font-black text-4xl text-zinc-950 my-5"
                                     >{data.name}
                                     
                                     </Dialog.Title>
-                                    <p className='text-lg text-slate-500 mb-2'>Descripción: {data.description}</p>
+                                    <p className='text-lg text-zinc-800 mb-2'>Descripción: {data.description}</p>
 
                                     {data.completedBy.length ? (
                                         <>

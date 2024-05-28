@@ -15,7 +15,7 @@ export default function AppLayout() {
     if(data) return (
         <>
             <header
-                className="bg-gray-800 py-5"
+                className="bg-zinc-900 py-5"
             >
                 <div className="max-w-screen-2xl mx-auto flex flex-col lg:flex-row justify-between items-center">
                     <div className="w-64">
@@ -36,7 +36,7 @@ export default function AppLayout() {
             </section>
 
             <footer className="py-5">
-                <p className="text-center">
+                <p className="text-center text-slate-600">
                     Derechos Reservados {new Date().getFullYear()}
                 </p>
             </footer>

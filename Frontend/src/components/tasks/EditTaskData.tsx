@@ -4,7 +4,6 @@ import { Navigate, useLocation, useParams } from "react-router-dom"
 import EditTaskModal from "./EditTaskModal";
 
 export default function EditTaskData() {
-    
     const params = useParams();
     const projectId = params.projectId!;
 

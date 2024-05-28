@@ -37,7 +37,7 @@ export default function CreateProjectViews() {
             <p className="text-2xl font-light text-gray-500 mt-5">Completa el Formulario y Crea tu Proyecto</p>
             <nav className="my-5">
                 <Link 
-                    className="bg-purple-400 hover:bg-purple-500 px-10 py-3 text-white text-xl font-bold cursor-pointer transitions-colors"
+                    className="bg-indigo-500 hover:bg-indigo-600 px-10 py-3 text-white text-xl font-bold cursor-pointer transitions-colors rounded-lg"
                     to={'/'}
                 >
                     Volver a Proyectos
@@ -58,7 +58,7 @@ export default function CreateProjectViews() {
                 <input 
                     type="submit"
                     value='Crear Proyecto'
-                    className="bg-fuchsia-600 hover:bg-fuchsia-700 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors"
+                    className="bg-indigo-700 hover:bg-indigo-800 w-full p-3 text-white uppercase font-bold cursor-pointer transition-colors"
                 />
             </form>
         </div>
