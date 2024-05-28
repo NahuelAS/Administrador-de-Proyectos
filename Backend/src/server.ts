@@ -5,7 +5,7 @@ import morgan from 'morgan';
 import { corsConfig } from './Config/cors';
 import { connectDB } from './Config/db';
 import authRoutes from './Routes/authRoutes';
-import projectRoutes from './Routes/proyectRoutes';
+import projectRoutes from './Routes/projectRoutes';
 
 
 dotenv.config();

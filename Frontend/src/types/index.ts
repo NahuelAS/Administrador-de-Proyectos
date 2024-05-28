@@ -31,28 +31,6 @@ export const userSchema = authSchema.pick({
 export type User = z.infer<typeof userSchema>;
 export type UserProfileForm = Pick<User, 'name' | 'email'>;
 
-/** Proyectos */
-export const projectSchema = z.object({
-    _id: z.string(),
-    projectName: z.string(),
-    clientName: z.string(),
-    description: z.string(),
-    manager: z.string(userSchema.pick({_id: true}))
-});
-
-export const dashboardProjectSchema =z.array(
-    projectSchema.pick({
-        _id: true,
-        projectName: true,
-        clientName: true,
-        description: true,
-        manager: true
-    })
-);
-
-export type Project = z.infer<typeof projectSchema>;
-export type ProjectFormData = Pick<Project, 'clientName' | 'projectName' | 'description'>;
-
 /** Notas */
 
 const noteSchema = z.object({
@@ -89,10 +67,49 @@ export const taskSchema = z.object({
     }))
 });
 
+export const taskProjectSchema = taskSchema.pick({
+    _id: true,
+    name: true,
+    description: true,
+    status: true
+});
+
 export type Task = z.infer<typeof taskSchema>;
 export type TaskFormData = Pick<Task, 'name' | 'description'>;
+export type TaskProject = z.infer<typeof taskProjectSchema>;
 
-/** Teams */
+/** Proyectos */
+export const projectSchema = z.object({
+    _id: z.string(),
+    projectName: z.string(),
+    clientName: z.string(),
+    description: z.string(),
+    manager: z.string(userSchema.pick({_id: true})),
+    tasks: z.array(taskProjectSchema),
+    team: z.array(z.string(userSchema.pick({_id: true})))
+});
+
+export const dashboardProjectSchema =z.array(
+    projectSchema.pick({
+        _id: true,
+        projectName: true,
+        clientName: true,
+        description: true,
+        manager: true
+    })
+);
+
+export const editProjectSchema = projectSchema.pick({
+    projectName: true,
+    clientName: true,
+    description: true
+});
+
+export type Project = z.infer<typeof projectSchema>;
+export type ProjectFormData = Pick<Project, 'clientName' | 'projectName' | 'description'>;
+
+
+/** Equipos */
 const teamMemberSchema = userSchema.pick({
     name: true,
     email: true,
