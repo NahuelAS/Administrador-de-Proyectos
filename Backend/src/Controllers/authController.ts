@@ -3,7 +3,7 @@ import User from '../Models/User';
 import { checkPassword, hashPassword } from '../utils/auth';
 import { generateToken } from '../utils/token';
 import Token from '../Models/Token';
-import { AuthEmail } from '../emails/AuthEmail';
+import { AuthEmail } from '../Emails/AuthEmail';
 import { generateJWT } from '../utils/jwt';
 
 export class AuthController {
