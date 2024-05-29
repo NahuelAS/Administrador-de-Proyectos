@@ -25,7 +25,7 @@ Como manejador de emails se utilizo [MailTrap](https://mailtrap.io/).
 ## Instalacion Local
 
 ### La Instalacion es simple: 
-**Una vez se trae el proyecto, en la terminal se deben ejecutar:**
+**Una vez se trae el proyecto, realizar lo siguiente:**
 ### Backend:
 - cd Backend
 - npm install
@@ -33,13 +33,13 @@ Como manejador de emails se utilizo [MailTrap](https://mailtrap.io/).
                 
 #### Para la base de datos se utilizo MongoDB Atlas y MongoDB Compass.
 - DATABASE_URL= "Aquí colocar la url de su base de datos" 
-- FRONTEND_URL=http://localhost:5173 "URL Frontend"
+- FRONTEND_URL= "URL Frontend"
 
 #### Aquí van los valores de MailTrap.
 - SMTP_HOST=sandbox.smtp.mailtrap.io      
 - SMTP_PORT=2525
-- SMTP_USER=3732d3ed4acaf9
-- SMTP_PASS=6e35fdc7cb1f89
+- SMTP_USER=3732d3ed4acaf3
+- SMTP_PASS=6e35fdc7cb1f84
 
 #### Aquí la clave para que se genere el JWT.
 - JWT_SECRET=clavesecreta
